@@ -7,7 +7,7 @@ export class UserController {
 
   @Get('/')
   @HttpCode(HttpStatus.OK)
-  getUsers(): string {
+  getUsers() {
     return this.userService.getUsers();
   }
 }
