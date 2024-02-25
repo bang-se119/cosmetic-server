@@ -11,14 +11,20 @@ export class ProductEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @PrimaryGeneratedColumn()
+  @Column()
   barcode: number;
 
   @Column()
   name: string;
 
   @Column()
+  short_name: string;
+
+  @Column()
   description: string;
+
+  @Column()
+  brand: string;
 
   @Column()
   photo: string;
@@ -32,19 +38,19 @@ export class ProductEntity {
   @Column()
   discount_price: string;
 
-  @Column()
-  avg_point: string;
+  @Column('int', { default: 0 })
+  avg_point: number;
 
-  @Column()
-  number_review: string;
+  @Column('int', { default: 0 })
+  number_review: number;
 
-  @Column()
+  @Column('varchar', { default: 'Out of stock' })
   status: string;
 
-  @Column()
+  @Column('int', { default: 0 })
   category_id: number;
 
-  @Column()
+  @Column('int', { default: 0 })
   user_id: number;
 
   @CreateDateColumn()

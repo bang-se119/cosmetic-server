@@ -5,7 +5,7 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Get('/')
+  @Get('/api/users')
   @HttpCode(HttpStatus.OK)
   getUsers() {
     return this.userService.getUsers();
