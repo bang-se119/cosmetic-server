@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpCode,
   HttpStatus,
@@ -31,7 +32,7 @@ export class ProductController {
     return this.productService.getProducts();
   }
 
-  @ApiBody({ type: AddNewProductDto })
+  @ApiBody({ type: UpdateProductDto })
   @Put('/api/product/update/:id')
   @HttpCode(HttpStatus.OK)
   updateProduct(
@@ -39,5 +40,11 @@ export class ProductController {
     @Body() product: UpdateProductDto,
   ) {
     return this.productService.updateProduct(id, product);
+  }
+
+  @Delete('/api/product/delete/:id')
+  @HttpCode(HttpStatus.OK)
+  deleteProduct(@Param('id', ParseIntPipe) id: number) {
+    return this.productService.deleteProduct(id);
   }
 }

@@ -33,8 +33,8 @@ export class ProductService {
       id: id,
     });
 
-    if (!product) {
-      throw new BadRequestException('Product not exist !');
+    if (!productFind) {
+      throw new BadRequestException('Product is not exist !');
     }
 
     const productUpdated = await this.productRepository.save({
@@ -45,6 +45,23 @@ export class ProductService {
     return {
       message: 'The product is updated successfully',
       data: productUpdated,
+    };
+  }
+
+  async deleteProduct(id: number) {
+    const productFind = await this.productRepository.findOneBy({
+      id: id,
+    });
+
+    if (!productFind) {
+      throw new BadRequestException('Product is not exist !');
+    }
+
+    const productDeleted = await this.productRepository.remove(productFind);
+
+    return {
+      message: 'The product is deleted successfully',
+      data: productDeleted,
     };
   }
 }
