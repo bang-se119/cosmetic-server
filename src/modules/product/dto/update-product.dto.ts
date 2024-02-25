@@ -1,41 +1,39 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class AddNewProductDto {
-  @IsNotEmpty({ message: 'Barcode is not empty !' })
-  @ApiProperty({ type: Number, example: '0101010101' })
+export class UpdateProductDto {
+  @IsOptional()
+  @IsNumber()
   barcode: number;
 
   @IsOptional()
   @IsString()
-  @ApiProperty({ type: String, example: 'P/S' })
   brand: string;
 
+  @IsOptional()
   @IsString()
-  @IsNotEmpty({ message: 'Name is not empty !' })
-  @ApiProperty({ type: String, example: 'Kem Đánh Răng' })
   name: string;
 
   @IsOptional()
   @IsString()
-  @ApiProperty({ type: String, example: 'KCN' })
   short_name: string;
 
   @IsOptional()
   @IsString()
-  @ApiProperty({ type: String, example: 'Cong dung cua kem chong nang' })
   description: string;
 
   @IsOptional()
   @IsString()
   photo: string;
 
+  @IsOptional()
   @IsString()
   original_price: string;
 
+  @IsOptional()
   @IsString()
   selling_price: string;
 
+  @IsOptional()
   @IsString()
   discount_price: string;
 

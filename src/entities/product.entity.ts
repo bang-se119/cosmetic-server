@@ -15,6 +15,9 @@ export class ProductEntity {
   barcode: number;
 
   @Column()
+  brand: string;
+
+  @Column()
   name: string;
 
   @Column()
@@ -23,10 +26,7 @@ export class ProductEntity {
   @Column()
   description: string;
 
-  @Column()
-  brand: string;
-
-  @Column()
+  @Column('varchar', { default: '' })
   photo: string;
 
   @Column()

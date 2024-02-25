@@ -1,8 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { AddNewProductDto } from './dto/add-new-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from 'src/entities/product.entity';
 import { Repository } from 'typeorm';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Injectable()
 export class ProductService {
@@ -24,6 +25,26 @@ export class ProductService {
     return {
       message: 'Get all products successfully!',
       data: responses,
+    };
+  }
+
+  async updateProduct(id: number, product: UpdateProductDto) {
+    const productFind = await this.productRepository.findOneBy({
+      id: id,
+    });
+
+    if (!product) {
+      throw new BadRequestException('Product not exist !');
+    }
+
+    const productUpdated = await this.productRepository.save({
+      ...productFind,
+      ...product,
+    });
+
+    return {
+      message: 'The product is updated successfully',
+      data: productUpdated,
     };
   }
 }

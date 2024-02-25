@@ -4,11 +4,15 @@ import {
   Get,
   HttpCode,
   HttpStatus,
+  Param,
+  ParseIntPipe,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { AddNewProductDto } from './dto/add-new-product.dto';
 import { ApiBody } from '@nestjs/swagger';
+import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller()
 export class ProductController {
@@ -25,5 +29,15 @@ export class ProductController {
   @HttpCode(HttpStatus.OK)
   getProducts() {
     return this.productService.getProducts();
+  }
+
+  @ApiBody({ type: AddNewProductDto })
+  @Put('/api/product/update/:id')
+  @HttpCode(HttpStatus.OK)
+  updateProduct(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() product: UpdateProductDto,
+  ) {
+    return this.productService.updateProduct(id, product);
   }
 }
