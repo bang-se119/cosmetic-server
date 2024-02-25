@@ -18,4 +18,12 @@ export class ProductService {
       data: requestData,
     };
   }
+
+  async getProducts() {
+    const responses = await this.productRepository.find();
+    return {
+      message: 'Get all products successfully!',
+      data: responses,
+    };
+  }
 }

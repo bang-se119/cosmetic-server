@@ -22,8 +22,8 @@ export class ProductController {
   }
 
   @Get('/api/product/list')
+  @HttpCode(HttpStatus.OK)
   getProducts() {
-    const products = [];
-    return products;
+    return this.productService.getProducts();
   }
 }
