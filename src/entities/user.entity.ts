@@ -11,15 +11,6 @@ export class UserEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  username: string;
-
-  @Column()
-  fullname: string;
-
-  @Column()
-  date_of_birth: Date;
-
   @Column({ unique: true })
   email: string;
 
@@ -27,10 +18,19 @@ export class UserEntity {
   phone: string;
 
   @Column()
-  role: string;
+  username: string;
 
   @Column()
-  address: string;
+  fullname: string;
+
+  @Column()
+  date_of_birth: string;
+
+  @Column()
+  gender: string;
+
+  @Column()
+  role: string;
 
   @Column()
   password: string;
