@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
-import { UserModule } from './modules/user/user.module';
-import { ProductModule } from './modules/product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { addTransactionalDataSource } from 'typeorm-transactional';
 import { DataSource } from 'typeorm';
 import dbConfig from './configs/database/mysql';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
+import { ProductModule } from './modules/product/product.module';
 
 @Module({
   imports: [
@@ -19,8 +20,9 @@ import dbConfig from './configs/database/mysql';
         return addTransactionalDataSource(new DataSource(options));
       },
     }),
-    ProductModule,
+    AuthModule,
     UserModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],

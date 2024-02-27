@@ -6,22 +6,14 @@ import {
   HttpStatus,
   Param,
   ParseIntPipe,
-  Post,
   Put,
 } from '@nestjs/common';
 import { UserService } from './user.service';
-import { RegisterUserDto } from './dto/register-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller()
 export class UserController {
   constructor(private readonly userService: UserService) {}
-
-  @Post('/api/user/register')
-  @HttpCode(HttpStatus.OK)
-  registerUser(@Body() user: RegisterUserDto) {
-    return this.userService.registerUser(user);
-  }
 
   @Get('/api/user/list')
   @HttpCode(HttpStatus.OK)

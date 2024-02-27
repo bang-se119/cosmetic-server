@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RegisterUserDto } from './dto/register-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
@@ -10,23 +9,11 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserService {
   constructor(
     @InjectRepository(UserEntity)
-    private readonly repositoryUser: Repository<UserEntity>,
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
 
-  async registerUser(user: RegisterUserDto) {
-    // Destructuring to get password from user object
-    const { password } = user;
-    const passwordHashed = await bcrypt.hash(password, 12);
-    const userNew = { ...user, password: passwordHashed };
-    const requestData = await this.repositoryUser.save(userNew);
-    return {
-      message: 'A new user is registered successfully!',
-      data: requestData,
-    };
-  }
-
   async getUsers() {
-    const responsesData = await this.repositoryUser.find();
+    const responsesData = await this.userRepository.find();
     return {
       message: 'Get all users successfully!',
       data: responsesData,
@@ -42,7 +29,7 @@ export class UserService {
       user = { ...user, password: passwordHashed };
     }
 
-    const userFind = await this.repositoryUser.findOneBy({
+    const userFind = await this.userRepository.findOneBy({
       id: id,
     });
 
@@ -50,7 +37,7 @@ export class UserService {
       throw new BadRequestException('User is not exist !');
     }
 
-    const userUpdated = await this.repositoryUser.save({
+    const userUpdated = await this.userRepository.save({
       ...userFind,
       ...user,
     });
